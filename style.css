@@ -158,6 +158,7 @@ button {
 
 button:hover {
     background-color: #242424;
+    transform: translateY(-0.5vh);
 }
 
 .outer.active button{
