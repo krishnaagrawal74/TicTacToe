@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+   
+    /* dark theme */
+    --outerDark: #1c1d1c ;
+    --containerDark: #191A19;
+    --boxDark: #2a2a2a;
+    --navDark: #1E201E;
+
+    /* light theme */
+    --outerLight: #d1e8fc;
+    --containerLight: #002244;
+    --boxLight: #AFDBF5;
+    --navLight: #d1e8fc;
+}
+
+.outer {
+    background: var(--outerDark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: 0.5s;
+}
+
+.outer.active {
+    background: var(--outerLight);
+}
+
+nav {
+    height: 10vh;
+    position: fixed;
+    top: 0px;
+    background-color: var(--navDark);
+    width: 100vw;
+    border-bottom: 1px solid whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0px 0px 10px 1px whitesmoke;
+    transition: 0.5s;
+}
+
+nav.active {
+    background-color: var(--navLight);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+
+
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 10vh;
+}
+.container {
+    height: 20rem;
+    width: 20rem;
+    padding: 12px;
+    background-color: var(--containerDark);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border-radius: 14px;
+    transition: 0.5s;
+    box-shadow: 0px 0px 10px 1px whitesmoke;
+}
+
+.container:hover {
+    box-shadow: 0px 0px 18px 1px whitesmoke;
+    /* scale: 1.02; */
+    transform: translateY(-5px);
+}
+
+.container.active {
+    background-color: var(--containerLight);
+    box-shadow: 0px 0px 20px 1px rgb(53, 53, 53);
+}
+
+
+
+.box {
+    border: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border-radius: 14px;
+    margin: 6px;
+    background-color: var(--boxDark);
+    transition: 0.5s;
+}
+
+.container.active .box {
+    background-color: var(--boxLight);
+    color: black;
+    border: none;
+}
+
+.box:hover {
+    background-color: rgb(31, 31, 31);
+    /* Keep the hover effect even when ::before exists */
+    box-shadow: 0px 0px 10px 1px whitesmoke;
+    scale: 1.05;
+
+
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 8vh;
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 2vh;
+    display: hidden;
+    
+    color: whitesmoke;
+    transition: 0.5s;
+}
+
+.outer.active .result{
+    color: #222;
+}
+
+button {
+    width: 60%;
+    height: 5vh;
+    margin-top: 2vh;
+    /* border: 1px solid rgb(255, 255, 255); */
+    color: white;
+    border: none;
+    border-radius: 5vh;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: large;
+    background-color: #191919;
+    transition: 0.5s;
+    box-shadow: 0px 0px 5px 1px rgb(170, 170, 170) ;
+}
+
+button:hover {
+    background-color: #242424;
+}
+
+.outer.active button{
+    background: #002244;
+    border: none;
+    color: white;
+    box-shadow: 0px 0px 5px 1px rgb(170, 170, 170);
+
+}
+
+
+.outer.active button:hover{
+    background: #002D72;
+    
+}
+
+
+
+/* for theme toggle */
+
+#toggle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border-radius: 40px;
+    /* border: 2px solid white; */
+    background: #222;
+    transition: 0.5s;
+    right: 5vw;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 5px 0px rgb(86, 86, 86);
+
+
+}
+
+#toggle.active {
+    background: azure;
+    /* border: 2px solid rgb(166, 73, 73); */
+    box-shadow: inset 0px 0px 5px rgb(140, 140, 140);
+
+}
+
+#toggle .indicator {
+    position: absolute;
+    /* top: 0px; */
+    left: 0px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(to bottom, #393939, #171717);
+    border-radius: 50%;
+    transform: scale(0.9);
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: inset 0px 0px 2px rgb(140, 140, 140);
+}
+
+#toggle.active .indicator {
+    left: 40px;
+    background: rgb(255, 208, 0);
+    box-shadow: inset 0px 0px 10px rgb(189, 189, 189);
+}
+
+@media screen and (max-width:400px) {
+    .container{
+        width: 80vw;
+        height: 80vw;
+    }
+
+    #toggle{
+        width: 60px;
+        height: 30px;
+    }
+
+    #toggle .indicator{
+        width: 30px;
+        height: 30px;
+    }
+}
