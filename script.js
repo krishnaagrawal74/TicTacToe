@@ -20,12 +20,14 @@ const winningCombinations = [
     [6, 4, 2]  // Diagonal 2
 ];
 
+// Modify checkWin function to return the winning combination
 function checkWin(player) {
-    return winningCombinations.some(combination => {
+    const winCombo = winningCombinations.find(combination => {
         return combination.every(index => {
             return boxlist[index].innerHTML === player;
         });
     });
+    return winCombo ? winCombo : null; // Return the winning combination or null if no win
 }
 
 boxlist.forEach(function toggleClass(box) {
@@ -43,30 +45,42 @@ boxlist.forEach(function toggleClass(box) {
         }
 
         setTimeout(() => {
-            if (checkWin("X")) {
+            const xWinCombo = checkWin("X");
+            const oWinCombo = checkWin("O");
+
+            if (xWinCombo) {
                 resultbox.innerHTML = "X WINS!";
                 endbtn.innerHTML = "New Game";
                 resultbox.style.display = "flex";
                 gameOver = true; // Set gameOver flag to true
-            } else if (checkWin("O")) {
+                highlightWinningCombo(xWinCombo); // Highlight winning combination
+            } else if (oWinCombo) {
                 resultbox.innerHTML = "O WINS!";
                 endbtn.innerHTML = "New Game";
                 resultbox.style.display = "flex";
                 gameOver = true; // Set gameOver flag to true
-            }else if (boxlist.every(box => box.innerHTML !== '')) {
+                highlightWinningCombo(oWinCombo); // Highlight winning combination
+            } else if (boxlist.every(box => box.innerHTML !== '')) {
                 resultbox.innerHTML = "DRAW!";
                 endbtn.innerHTML = "New Game";
                 resultbox.style.display = "flex";
                 gameOver = true; // Set gameOver flag to true
             }
-            
         }, 0);
     });
 });
 
+// Function to highlight the winning combination
+function highlightWinningCombo(combo) {
+    combo.forEach(index => {
+        boxlist[index].classList.add('highlight'); // Add 'highlight' class to winning boxes
+    });
+}
+
 endbtn.addEventListener('click', () => {
     boxes.forEach(box => {
         box.innerHTML = "";
+        box.classList.remove('highlight'); // Remove 'highlight' class when game is reset
     });
     resultbox.innerHTML = "";
     resultbox.style.display = "hidden";
@@ -74,8 +88,8 @@ endbtn.addEventListener('click', () => {
     user1 = true; // Reset user turns
     user2 = false;
     endbtn.innerHTML = "End Game";
-
 });
+
 
 
 // for toggle theme
@@ -88,3 +102,4 @@ toggle.onclick = function(){
     outer.classList.toggle('active');
     container.classList.toggle('active');
 }
+
